@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Silent Gamers - Registration</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Orbitron:wght@700;900&display=swap');
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+      color: #ffd700;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 30px;
+      background: linear-gradient(to right, #ff8c00, #ffd700, #ff8c00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+    
+    .logo-container {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .logo {
+      width: 200px;
+      height: 200px;
+      object-fit: contain;
+      border: 4px solid #ff8c00;
+      border-radius: 10px;
+      box-shadow: 0 0 30px rgba(255, 140, 0, 0.5);
+    }
+    
+    .form-container {
+      background: rgba(0, 0, 0, 0.8);
+      padding: 40px;
+      border-radius: 15px;
+      border: 3px solid #ff8c00;
+      box-shadow: 0 0 40px rgba(255, 140, 0, 0.3);
+    }
+    
+    .form-group {
+      margin-bottom: 25px;
+    }
+    
+    .label-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    
+    label {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #ff8c00;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .info-btn {
+      background: none;
+      border: none;
+      color: #ffd700;
+      cursor: pointer;
+      font-size: 1.2rem;
+      padding: 5px 10px;
+      transition: color 0.3s;
+    }
+    
+    .info-btn:hover {
+      color: #ffb347;
+    }
+    
+    input {
+      width: 100%;
+      padding: 15px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      background: rgba(0, 0, 0, 0.9);
+      border: 2px solid #ffd700;
+      border-radius: 8px;
+      color: #ffd700;
+      font-family: 'Rajdhani', sans-serif;
+    }
+    
+    input:focus {
+      outline: none;
+      border-color: #ff8c00;
+      box-shadow: 0 0 10px rgba(255, 140, 0, 0.5);
+    }
+    
+    input::placeholder {
+      color: rgba(255, 215, 0, 0.3);
+    }
+    
+    .submit-btn {
+      width: 100%;
+      padding: 18px;
+      font-size: 1.4rem;
+      font-weight: 900;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(to right, #ff8c00, #ffd700, #ff8c00);
+      color: #000;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 5px 20px rgba(255, 140, 0, 0.4);
+    }
+    
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 7px 25px rgba(255, 140, 0, 0.6);
+    }
+    
+    .submit-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    .alert {
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    
+    .alert-error {
+      background: rgba(255, 0, 0, 0.2);
+      border: 2px solid #ff0000;
+      color: #ff6b6b;
+    }
+    
+    .alert-success {
+      background: rgba(0, 255, 0, 0.2);
+      border: 2px solid #00ff00;
+      color: #69db7c;
+    }
+    
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 1000;
+      overflow-y: auto;
+    }
+    
+    .modal-content {
+      background: linear-gradient(135deg, #0a0a0a 0%, #2a1a0a 50%, #0a0a0a 100%);
+      border: 4px solid #ff8c00;
+      border-radius: 15px;
+      max-width: 800px;
+      margin: 50px auto;
+      box-shadow: 0 0 50px rgba(255, 140, 0, 0.6);
+    }
+    
+    .modal-header {
+      background: linear-gradient(to right, #ff8c00, #ffd700);
+      padding: 20px;
+      border-radius: 10px 10px 0 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .modal-header h2 {
+      color: #000;
+      font-size: 1.8rem;
+      font-weight: 900;
+      font-family: 'Orbitron', sans-serif;
+      text-transform: uppercase;
+    }
+    
+    .close-btn {
+      background: none;
+      border: none;
+      color: #000;
+      font-size: 2rem;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    
+    .modal-body {
+      padding: 30px;
+    }
+    
+    .modal-body p {
+      color: #ffd700;
+      font-size: 1.2rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+    
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      margin-bottom: 20px;
+      border: 4px solid #ffd700;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .got-it-btn {
+      width: 100%;
+      padding: 15px;
+      font-size: 1.2rem;
+      font-weight: 900;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(to right, #ff8c00, #ffd700, #ff8c00);
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+    
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .logo {
+        width: 150px;
+        height: 150px;
+      }
+      
+      .form-container {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>SILENT GAMERS</h1>
+    
+    <div class="logo-container">
+      <img src="https://ik.imagekit.io/silentgamers/Picsart_25-09-22_00-09-34-964.png?updatedAt=1758480146212&ik-s=4f744f417100daea8710c3389638e583c2987985" alt="Silent Gamers Logo" class="logo">
+    </div>
+    
+    <div class="form-container">
+      <div id="alertContainer"></div>
+      
+      <form id="signupForm">
+        <div class="form-group">
+          <div class="label-container">
+            <label for="email">Email Address</label>
+            <button type="button" class="info-btn" onclick="showInfo('email')">ℹ️</button>
+          </div>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+        
+        <div class="form-group">
+          <div class="label-container">
+            <label for="username">Username</label>
+            <button type="button" class="info-btn" onclick="showInfo('username')">ℹ️</button>
+          </div>
+          <input type="text" id="username" name="username" placeholder="Enter your username" required>
+        </div>
+        
+        <div class="form-group">
+          <div class="label-container">
+            <label for="mobileNumber">Mobile Number</label>
+            <button type="button" class="info-btn" onclick="showInfo('mobileNumber')">ℹ️</button>
+          </div>
+          <input type="tel" id="mobileNumber" name="mobileNumber" placeholder="Enter your mobile number" required>
+        </div>
+        
+        <div class="form-group">
+          <div class="label-container">
+            <label for="gameUID">Game UID</label>
+            <button type="button" class="info-btn" onclick="showInfo('gameUID')">ℹ️</button>
+          </div>
+          <input type="text" id="gameUID" name="gameUID" placeholder="Enter your game UID" required>
+        </div>
+        
+        <div class="form-group">
+          <div class="label-container">
+            <label for="instagram">Instagram</label>
+            <button type="button" class="info-btn" onclick="showInfo('instagram')">ℹ️</button>
+          </div>
+          <input type="text" id="instagram" name="instagram" placeholder="Enter your Instagram handle" required>
+        </div>
+        
+        <div class="form-group">
+          <div class="label-container">
+            <label for="gameName">Game Name</label>
+            <button type="button" class="info-btn" onclick="showInfo('gameName')">ℹ️</button>
+          </div>
+          <input type="text" id="gameName" name="gameName" placeholder="Enter your game name" required>
+        </div>
+        
+        <div class="form-group">
+          <div class="label-container">
+            <label for="upiId">UPI ID</label>
+            <button type="button" class="info-btn" onclick="showInfo('upiId')">ℹ️</button>
+          </div>
+          <input type="text" id="upiId" name="upiId" placeholder="Enter your UPI ID" required>
+        </div>
+        
+        <button type="submit" class="submit-btn" id="submitBtn">Register Now</button>
+      </form>
+    </div>
+  </div>
+  
+  <!-- Info Modal -->
+  <div id="infoModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modalTitle"></h2>
+        <button class="close-btn" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p id="modalDescription"></p>
+        <div id="videoContainer"></div>
+        <button class="got-it-btn" onclick="closeModal()">Got It!</button>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    const fieldInfos = {
+      email: {
+        title: 'Email Address',
+        description: 'You need to fill this correct because your password we send you on gmail',
+      },
+      username: {
+        title: 'Username',
+        description: 'You can write your real name here.',
+      },
+      mobileNumber: {
+        title: 'Mobile Number',
+        description: 'You need to provide this correct. We will verify you by a call',
+      },
+      gameUID: {
+        title: 'Game UID',
+        description: 'No entry of other uid\'s in tournament',
+        videoUrl: 'https://imagekit.io/player/embed/silentgamers/IMG_0068.MOV/ik-video.mp4?updatedAt=1759581405435&ik-s=41f3914fafae92001f85259ce01e3c8a3a094fd4',
+      },
+      instagram: {
+        title: 'Instagram',
+        description: 'We provide you free service with no hacker policy. We charge that you follow us from an account compulsory. Enter here that account by which you follow us.',
+      },
+      gameName: {
+        title: 'Game Name',
+        description: 'Copy your exact game name',
+        videoUrl: 'https://imagekit.io/silentgamers/Screen_Recording_20251005_074131_Free%20Fire%20MAX.mp4?updatedAt=1759630719457&ik-s=f272290247e840d328501590ebeb4d1293c3f37a',
+      },
+      upiId: {
+        title: 'UPI ID',
+        description: 'When you withdraw blue tokens which account we need to give money in. So we need UPI id',
+      },
+    };
+    
+    const shownPopups = new Set();
+    
+    // Show info popup
+    function showInfo(fieldName) {
+      const info = fieldInfos[fieldName];
+      if (!info) return;
+      
+      document.getElementById('modalTitle').textContent = info.title;
+      document.getElementById('modalDescription').textContent = info.description;
+      
+      const videoContainer = document.getElementById('videoContainer');
+      if (info.videoUrl) {
+        videoContainer.innerHTML = `
+          <div class="video-container">
+            <iframe src="${info.videoUrl}" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
+          </div>
+        `;
+      } else {
+        videoContainer.innerHTML = '';
+      }
+      
+      document.getElementById('infoModal').style.display = 'block';
+    }
+    
+    // Close modal
+    function closeModal() {
+      document.getElementById('infoModal').style.display = 'none';
+    }
+    
+    // Show popup on first focus
+    document.querySelectorAll('input').forEach(input => {
+      input.addEventListener('focus', function() {
+        const fieldName = this.name;
+        if (!shownPopups.has(fieldName)) {
+          showInfo(fieldName);
+          shownPopups.add(fieldName);
+        }
+      });
+    });
+    
+    // Show alert
+    function showAlert(message, type) {
+      const alertContainer = document.getElementById('alertContainer');
+      const alertClass = type === 'error' ? 'alert-error' : 'alert-success';
+      alertContainer.innerHTML = `<div class="alert ${alertClass}">${message}</div>`;
+      
+      setTimeout(() => {
+        alertContainer.innerHTML = '';
+      }, 5000);
+    }
+    
+    // Handle form submission
+    document.getElementById('signupForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Registering...';
+      
+      const formData = {
+        email: document.getElementById('email').value,
+        username: document.getElementById('username').value,
+        mobileNumber: document.getElementById('mobileNumber').value,
+        gameUID: document.getElementById('gameUID').value,
+        instagram: document.getElementById('instagram').value,
+        gameName: document.getElementById('gameName').value,
+        upiId: document.getElementById('upiId').value,
+      };
+      
+      try {
+        const response = await fetch(window.location.href, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+          showAlert(result.message, 'success');
+          document.getElementById('signupForm').reset();
+          shownPopups.clear();
+        } else {
+          showAlert(result.error, 'error');
+        }
+      } catch (error) {
+        showAlert('An error occurred. Please try again.', 'error');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Register Now';
+      }
+    });
+    
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+      const modal = document.getElementById('infoModal');
+      if (event.target === modal) {
+        closeModal();
+      }
+    };
+  </script>
+</body>
+</html>
